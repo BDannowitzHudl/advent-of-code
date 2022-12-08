@@ -43,7 +43,7 @@ class File:
     def __init__(self, name: str, size: int, parent: Directory):
         self.name: str = name
         self.size: int = size
-        self.paren: Directory = parent
+        self.parent: Directory = parent
 
     def __repr__(self):
         return f"{self.size} {self.name}"
