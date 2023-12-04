@@ -175,7 +175,7 @@ if __name__ == "__main__":
     )
     print(f"Part One: {part_one(DATA)}")
 
-    # Completed Part Two at 8:54AM CST
+    # Completed Part One at 8:54AM CST
 
     # Starting Part Two at 9:01AM CST
 
