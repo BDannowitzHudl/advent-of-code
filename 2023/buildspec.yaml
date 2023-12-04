@@ -1,0 +1,16 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      # The PIP_EXTRA_INDEX_URL is set in our build config and overwrites the config file
+      # created by .pymarvel/build_tokens.sh.
+      # Once PIP_EXTRA_INDEX_URL is not set this can also go.
+      - export PIP_EXTRA_INDEX_URL=""
+      - .pymarvel/build_tokens.sh
+      - python -m pip install pip==22.2.2
+      - pip install hudl-container-deploy~=2.0.0
+
+  build:
+    commands:
+      - hudl-container-deploy push-image hudl-danno/advent/2023 . Dockerfile

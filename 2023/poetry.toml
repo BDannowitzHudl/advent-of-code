@@ -1,0 +1,4 @@
+[virtualenvs]
+# Poetry VirtualEnv Options: https://python-poetry.org/docs/configuration/#virtualenvscreate
+in-project = true
+create = true

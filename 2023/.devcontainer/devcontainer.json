@@ -1,0 +1,15 @@
+{
+  "name": "advent-2023",
+  "image": "690616407375.dkr.ecr.us-east-1.amazonaws.com/py-marvel/devcontainers/images/python:latest",
+  // Project specific customizations, on top of defaults from the base image.
+  "customizations": {
+    "vscode": {
+      "settings": {
+        // Not everyone likes the default so keep this setting configurable.
+        "autoDocstring.docstringFormat": "numpy-notypes"
+      }
+    }
+  },
+  "initializeCommand": ".devcontainer/devcontainer_init.sh",
+  "postCreateCommand": ".devcontainer/devcontainer_postcreate.sh"
+}

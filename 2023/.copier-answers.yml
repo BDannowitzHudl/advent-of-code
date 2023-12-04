@@ -1,0 +1,12 @@
+# Changes here will be overwritten by Copier
+_commit: 2.0.4
+_src_path: git+ssh://git@github.com/hudl/py-marvel
+autodocstring_format: numpy-notypes
+ecr_repository: hudl-danno/advent/2023
+image: python
+image_tag: latest
+name: advent-2023
+package_name: advent_2023
+subdirectory: .
+type: image
+
