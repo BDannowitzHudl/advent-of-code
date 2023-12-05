@@ -145,10 +145,6 @@ def part_one(data: List[str]) -> int:
     return worth
 
 
-def one() -> int:
-    return 1
-
-
 def part_two(data: List[str]) -> int:
     cards: List[Card] = [Card(card) for card in data]
     for i, card in enumerate(cards):
@@ -179,7 +175,7 @@ if __name__ == "__main__":
     )
     print(f"Part One: {part_one(DATA)}")
 
-    # Completed Part Two at 8:54AM CST
+    # Completed Part One at 8:54AM CST
 
     # Starting Part Two at 9:01AM CST
 
