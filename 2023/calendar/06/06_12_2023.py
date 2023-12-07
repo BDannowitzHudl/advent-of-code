@@ -138,7 +138,7 @@ def part_two(data: List[str]) -> int:
 
 if __name__ == "__main__":
     WORKING_DIR = Path(__file__).parent
-    DATA = open(WORKING_DIR / "data.csv").read().splitlines()
+    DATA = open(WORKING_DIR / "data.csv", encoding="utf-8").read().splitlines()
 
     TEST_DATA: List[str] = [
         "Time:     7  15   30",

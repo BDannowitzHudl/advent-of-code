@@ -263,7 +263,6 @@ def part_two(data: List[str]) -> int:
     hands.sort()
     score = sum([hand.bet * (i + 1) for i, hand in enumerate(hands)])
     return score
-    return 0
 
 
 if __name__ == "__main__":
@@ -277,10 +276,10 @@ if __name__ == "__main__":
         "KTJJT 220",
         "QQQJA 483",
     ]
-    PART_ONE_EXPECTED_VALUE = 6440
 
     # Starting Part One at 9:25AM CST
 
+    PART_ONE_EXPECTED_VALUE = 6440
     print(f"Part One: {part_one(TEST_DATA)} (expected {PART_ONE_EXPECTED_VALUE})")
     print(f"Part One: {part_one(DATA)}")
 
