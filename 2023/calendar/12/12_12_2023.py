@@ -142,6 +142,7 @@ from typing import List
 from pathlib import Path
 from enum import Enum
 from tqdm import tqdm
+import functools
 
 
 class Spring(Enum):
@@ -211,6 +212,7 @@ class SpringRecord:
             return 1
         if Spring.UNKNOWN not in self.springs:
             return 0
+
         # Try replacing the first unknown spring with a working and broken spring
         first_unknown = self.springs.index(Spring.UNKNOWN)
 
