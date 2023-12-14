@@ -1,8 +1,11 @@
 """
 --- Day 12: Hot Springs ---
-You finally reach the hot springs! You can see steam rising from secluded areas attached to the primary, ornate building.
+You finally reach the hot springs! You can see steam rising from secluded areas
+attached to the primary, ornate building.
 
-As you turn to enter, the researcher stops you. "Wait - I thought you were looking for the hot springs, weren't you?" You indicate that this definitely looks like hot springs to you.
+As you turn to enter, the researcher stops you. "Wait - I thought you were looking for
+the hot springs, weren't you?" You indicate that this definitely looks like hot springs
+to you.
 
 "Oh, sorry, common mistake! This is actually the onsen! The hot springs are next door."
 
@@ -138,7 +141,7 @@ After unfolding, adding all of the possible arrangement counts together produces
 Unfold your condition records; what is the new sum of possible arrangement counts?
 
 """
-from typing import List
+from typing import List, Tuple
 from pathlib import Path
 from enum import Enum
 from tqdm import tqdm
@@ -206,6 +209,7 @@ class SpringRecord:
 
     @property
     def combinations(self) -> int:
+
         if self.valid == Validity.VALID:
             # If there's no unknown springs and the groups match,
             # there's only one combination
@@ -235,6 +239,68 @@ class SpringRecord:
         return combinations
 
 
+@functools.lru_cache(maxsize=None)
+def get_combinations(spring_record_str: str, groups: Tuple[int, ...]) -> int:
+
+    if len(groups) == 0:
+        # No more groups to check, so just need to check if there are possibly any
+        # more broken springs
+        if Spring.BROKEN.value in spring_record_str:
+            return 0
+        else:
+            return 1
+
+    if len(spring_record_str) == 0:
+        # womp womp
+        return 0
+
+    next_group = groups[0]
+    next_character = spring_record_str[0]
+
+    def working() -> int:
+        # Nothing to see here, onto the next substring
+        return get_combinations(spring_record_str[1:], groups)
+
+    def broken() -> int:
+        relevant_substr = spring_record_str[:next_group]
+
+        relevant_substr = relevant_substr.replace(
+            Spring.UNKNOWN.value, Spring.BROKEN.value
+        )
+
+        # Simple cases to check:
+        if relevant_substr != next_group * Spring.BROKEN.value:
+            # There are more broken springs than the group size
+            return 0
+
+        if len(spring_record_str) == next_group:
+            if len(groups) == 1:
+                # This is the last group, so we're done
+                return 1
+            else:
+                # There are more groups, but no more springs, so we're done
+                return 0
+
+        next_character = spring_record_str[next_group]
+        if next_character in [Spring.UNKNOWN.value, Spring.WORKING.value]:
+            # Make sure the next character could feasibly be a working spring
+            return get_combinations(spring_record_str[next_group + 1 :], groups[1:])
+
+        return 0
+
+    if next_character == Spring.BROKEN.value:
+        return broken()
+
+    elif next_character == Spring.WORKING.value:
+        return working()
+
+    elif next_character == Spring.UNKNOWN.value:
+        return working() + broken()
+
+    else:
+        raise ValueError(f"Unknown spring character {next_character}")
+
+
 def part_one(data: List[str]) -> int:
     spring_records: List[SpringRecord] = [SpringRecord(line) for line in data]
     total: int = 0
@@ -244,13 +310,15 @@ def part_one(data: List[str]) -> int:
 
 
 def part_two(data: List[str]) -> int:
-    spring_records: List[SpringRecord] = [SpringRecord(line, part=2) for line in data]
     total: int = 0
-    for sr in tqdm(spring_records, ncols=80):
-        print(str(sr), sr.combinations)
-        combinations = sr.combinations**5
-        if sr.springs[-1] == Spring.BROKEN:
-            combinations *= 2**4
+    for line in data:
+        spring_record_str, groups_str = line.split(" ")
+        spring_record_str = "?".join([spring_record_str] * 5)
+
+        groups = tuple(int(g) for g in groups_str.split(","))
+        groups = groups * 5
+
+        combinations = get_combinations(spring_record_str, groups)
         total += combinations
     return total
 
@@ -280,6 +348,6 @@ if __name__ == "__main__":
 
     PART_TWO_EXPECTED_VALUE: int = 525152
     print(f"Part Two: {part_two(TEST_DATA)} (expected {PART_TWO_EXPECTED_VALUE})")
-    # print(f"Part Two: {part_two(DATA)}")
+    print(f"Part Two: {part_two(DATA)}")
 
     # Completed Part Two at

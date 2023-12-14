@@ -130,9 +130,8 @@ north support beams?
 from typing import List
 from pathlib import Path
 from enum import Enum
-from tqdm import tqdm
-import matplotlib.pyplot as plt
 import functools
+from tqdm import tqdm
 
 
 class PlatformObject(Enum):
