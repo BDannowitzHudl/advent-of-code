@@ -157,6 +157,15 @@ class Ditch:
             0.5, cap_style=BufferCapStyle.square, join_style=BufferJoinStyle.mitre
         ).exterior.xy
         ax.plot(x, y, color="#999999", linewidth=3, zorder=1)
+        # Fill with lava red
+        ax.fill(
+            x,
+            y,
+            color="#FF0000",
+            alpha=0.5,
+            linewidth=0,
+            zorder=2,
+        )
         plt.savefig(filename)
 
 
