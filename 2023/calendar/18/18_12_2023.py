@@ -152,7 +152,7 @@ class Ditch:
     def save(self, filename: str) -> None:
         from matplotlib import pyplot as plt
 
-        fig, ax = plt.subplots()
+        _, ax = plt.subplots()
         x, y = self.poly.buffer(
             0.5, cap_style=BufferCapStyle.square, join_style=BufferJoinStyle.mitre
         ).exterior.xy
@@ -216,4 +216,4 @@ if __name__ == "__main__":
     print(f"Part Two: {part_two(TEST_DATA)} (expected {PART_TWO_EXPECTED_VALUE})")
     print(f"Part Two: {part_two(DATA)}")
 
-    # Completed Part Two at
+    # Completed Part Two at 9:29AM CST
