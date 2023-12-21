@@ -327,6 +327,7 @@ def get_combinations(
 
 def part_one(data: List[str]) -> int:
     rulesets: List[Ruleset] = []
+    ix = 0
     for ix, line in enumerate(data):
         if line == "":
             break
@@ -347,7 +348,7 @@ def part_one(data: List[str]) -> int:
 
 def part_two(data: List[str]) -> int:
     rulesets: List[Ruleset] = []
-    for ix, line in enumerate(data):
+    for line in data:
         if line == "":
             break
         rulesets.append(Ruleset(line))
