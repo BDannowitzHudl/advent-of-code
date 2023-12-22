@@ -296,15 +296,15 @@ def plot_field(g: nx.Graph) -> None:
     print()
 
 
-def part_one(data: List[str], steps: int = 6) -> int:
+def part_one(data: List[str], n_steps: int = 6) -> int:
     field = make_field(data)
-    score = field.do_steps(steps)
+    score = field.do_steps(n_steps)
     return score
 
 
-def part_two(data: List[str], steps: int = 6) -> int:
+def part_two(data: List[str], n_steps: int = 6) -> int:
     field = make_field(data, part=2)
-    score = field.do_steps(steps)
+    score = field.do_steps(n_steps)
     return score
 
 
@@ -330,10 +330,10 @@ if __name__ == "__main__":
 
     PART_ONE_EXPECTED_VALUE: int = 16
     print(
-        f"Part One: {part_one(data=TEST_DATA, steps=6)} "
+        f"Part One: {part_one(data=TEST_DATA, n_steps=6)} "
         f"(expected {PART_ONE_EXPECTED_VALUE})"
     )
-    print(f"Part One: {part_one(data=DATA, steps=64)}")
+    print(f"Part One: {part_one(data=DATA, n_steps=64)}")
 
     # Completed Part One at 6:12AM CST
 
@@ -350,10 +350,10 @@ if __name__ == "__main__":
     }
     for steps, expected_value in PART_TWO_EXPECTED_VALUE.items():
         print(
-            f"Part Two Test ({steps} steps): {part_two(data=TEST_DATA, steps=steps)} "
+            f"Part Two Test ({steps} steps): {part_two(data=TEST_DATA, n_steps=steps)} "
             f"(expected {expected_value})"
         )
     GOAL_STEPS = 26501365
-    print(f"Part Two: {part_two(data=DATA, steps=GOAL_STEPS)}")
+    print(f"Part Two: {part_two(data=DATA, n_steps=GOAL_STEPS)}")
 
     # Completed Part Two at 9:30AM CST
